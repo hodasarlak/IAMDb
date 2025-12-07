@@ -1,13 +1,30 @@
-import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
+import { useEffect } from "react";
+import { category } from "../../services/category";
+import { cn } from "../../lib/utils";
+import { useState } from "react";
+
 const Category = () => {
+  const [toggle, setToggle] = useState(false)
+  const [cat, setCat] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setCat(await category(toggle))
+    }
+    fetchData();
+  }, [toggle]);
+
+  const bOnClick = (event) => {
+    event.preventDefault()
+    setToggle(previousState => !previousState)
+  }
+
   return (
     <div className="flex gap-2.5">
-      <div className="bg-slate-800 px-3 py-1.5 rounded-xl">Category</div>
-      <div className="bg-slate-800 px-3 py-1.5 rounded-xl">Category</div>
-      <div className="bg-slate-800 px-3 py-1.5 rounded-xl">Category</div>
-      <div className="bg-slate-800 px-3 py-1.5 rounded-xl">Category</div>
-
-      <LoadMoreButton />
+      {cat.map(item => <div key={item.id} className="bg-slate-800 px-3 py-1.5 rounded-xl">{item.title}</div> )}
+      <div className={cn(`bg-slate-800 px-3 py-1.5 rounded-xl ${toggle ? "hidden" : "block"}`)}>
+        <button onClick={bOnClick}>LoadMore <span className="ml-2">❯</span></button>
+      </div>
     </div>
   );
 };

@@ -3,9 +3,23 @@ import voicesearch from "../assets/images/voicesearch.svg"
 import { useState } from "react"
 import { useEffect } from "react"
 import { movie } from "../services/movie"
+import { useSearchParams } from "react-router"
+import { categoryById } from "../services/category"
 
 const SearchResults = () => {
   const [res, setRes] = useState([])
+  const [searchParams] = useSearchParams()
+  const [text, setText] = useState("")
+  const categoryId = searchParams.get("categoryId")
+  const query = searchParams.get("query")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await categoryById(categoryId)
+      setText(query || res.title)
+    }
+    fetchData()
+  }, [query, categoryId])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +37,7 @@ const SearchResults = () => {
           </button>
           <div className="grow text-center">
             <p className="text-white font-bold">Result</p>
-            <p className="text-gray-400">for "Search Query"</p>
+            <p className="text-gray-400">for "{text}"</p>
           </div>
         </div>
       </div>
@@ -31,7 +45,7 @@ const SearchResults = () => {
         <button className="search-icon-btn">
           <img src={search} />
         </button>
-        <input type="search" className="grow" />
+        <input type="search" className="grow" value={text} />
         <button className="search-icon-btn">
           <img src={voicesearch} className="border-l-2  border-black pl-3" />
         </button>

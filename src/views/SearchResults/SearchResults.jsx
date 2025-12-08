@@ -2,6 +2,7 @@ import { useState } from "react"
 import Search from "../../components/Search/Search"
 import { useEffect } from "react"
 import { Result } from "../../services/category"
+
 const SearchResults = () => {
   const [res, setRes] = useState([])
 

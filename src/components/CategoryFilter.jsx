@@ -24,7 +24,7 @@ const Category = () => {
     <div className="flex gap-2.5">
       {cat.map((item) => (
         <Link
-          to={`/result/${item.id}`}
+          to={`/result?categoryId=${item.id}`}
           key={item.id}
           className="bg-slate-800 px-3 py-1.5 rounded-xl"
         >

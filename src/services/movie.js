@@ -8,7 +8,10 @@ const movie = () => {
       title: "12 Angry Man",
       year: 1957,
       country: "United State",
-      category: ["Action", "Drama"],
+      category: [
+        { id: 1, title: "Action" },
+        { id: 4, title: "Drama" },
+      ],
       score: 9.0,
     },
     {
@@ -16,7 +19,10 @@ const movie = () => {
       title: "The Godfather:Part||",
       year: 1974,
       country: "United State",
-      category: ["Crime", "Drama"],
+      category: [
+        { id: 3, title: "Crime" },
+        { id: 4, title: "Drama" },
+      ],
       score: 9.0,
     },
     {
@@ -24,7 +30,10 @@ const movie = () => {
       title: "The Dark Knight",
       year: 2008,
       country: "United State",
-      category: ["Crime", "Drama"],
+      category: [
+        { id: 3, title: "Crime" },
+        { id: 4, title: "Drama" },
+      ],
       score: 9.1,
     },
   ]

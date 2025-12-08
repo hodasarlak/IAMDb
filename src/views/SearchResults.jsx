@@ -18,7 +18,7 @@ const SearchResults = () => {
       <div className="container">
         <div className="flex">
           <button className="bg-slate-800 p-2.5 rounded-2xl text-white">
-            left{" "}
+            &lt;
           </button>
           <div className="grow text-center">
             <p className="text-white font-bold">Result</p>

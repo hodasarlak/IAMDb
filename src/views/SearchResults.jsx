@@ -9,7 +9,6 @@ import MovieItem from "../components/MovieItem"
 
 const SearchResults = () => {
   const [movies, setMovies] = useState([])
-  // const [res, setRes] = useState()
   const [searchParams] = useSearchParams()
   const [text, setText] = useState("")
   const categoryId = searchParams.get("categoryId")
@@ -19,19 +18,10 @@ const SearchResults = () => {
     const fetchData = async () => {
       const res = await categoryById(categoryId)
       setText(query || res.title)
+      setMovies(await movie(categoryId, query))
     }
     fetchData()
-  }, [query, categoryId])
-
-  useEffect(() => {
-    const fetchData = async () => {
-    setMovies(await movie())
-    
-    }
-    fetchData()
-  }, [])
-
-
+  }, [categoryId, query])
 
   return (
     <div className="bg h-screen py-12.5 px-45 flex flex-col gap-8">
@@ -56,7 +46,9 @@ const SearchResults = () => {
         </button>
       </div>
       <div className="text-white">
-        {movies.map( item => <MovieItem item={item}/>)}
+        {movies.map((item) => (
+          <MovieItem item={item} />
+        ))}
       </div>
     </div>
   )

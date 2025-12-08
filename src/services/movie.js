@@ -1,14 +1,14 @@
-const movie = () => {
+const movie = (categoryId = undefined, query = undefined) => {
   // MOCK DATA
   // TODO: CALL THE API
   // fetch("http://localhost:8080/api/v1/Result")
-  return [
+  const movies = [
     {
       id: 1,
       title: "The Shawshink Redemption",
       year: 1994,
       country: "United State",
-      category: [{ id: 1, title: "Drama" }],
+      category: [{ id: 4, title: "Drama" }],
       score: 9.3,
     },
     {
@@ -17,8 +17,8 @@ const movie = () => {
       year: 1972,
       country: "United State",
       category: [
-        { id: 2, title: "Crime" },
-        { id: 2, title: "Drama" },
+        { id: 3, title: "Crime" },
+        { id: 4, title: "Drama" },
       ],
       score: 9.2,
     },
@@ -29,8 +29,8 @@ const movie = () => {
       country: "United State",
       category: [
         { id: 3, title: "Crime" },
-        { id: 3, title: "Drama" },
-        { id: 3, title: "Action" },
+        { id: 4, title: "Drama" },
+        { id: 1, title: "Action" },
       ],
       score: 9.0,
     },
@@ -40,7 +40,7 @@ const movie = () => {
       year: 1974,
       country: "United State",
       category: [
-        { id: 4, title: "Crime" },
+        { id: 3, title: "Crime" },
         { id: 4, title: "Drama" },
       ],
       score: 9.0,
@@ -51,12 +51,21 @@ const movie = () => {
       year: 1957,
       country: "United State",
       category: [
-        { id: 5, title: "Action" },
-        { id: 5, title: "Drama" },
+        { id: 1, title: "Action" },
+        { id: 4, title: "Drama" },
       ],
       score: 9.0,
     },
   ]
+  if (categoryId) {
+    return movies.filter((item) =>
+      item.category.filter((item2) => item2.id === +categoryId).length !== 0
+    )
+  }
+  if (query) {
+    return movies.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
+  }
+  return movies
 }
 
 export { movie }

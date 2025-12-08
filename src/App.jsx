@@ -1,6 +1,7 @@
 import logo from "./assets/images/logo.svg"
-import CategoryFilter from "./components/CategoryFilter/CategoryFilter.jsx"
-import Search from "./components/Search/Search.jsx"
+import CategoryFilter from "./components/CategoryFilter"
+import Search from "./components/Search"
+
 const App = () => {
   return (
     <div className="bg flex justify-center">

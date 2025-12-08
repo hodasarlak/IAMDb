@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import { category } from "../../services/category"
-import { cn } from "../../lib/utils"
+import { category } from "../services/category"
+import { cn } from "../lib/utils"
 import { useState } from "react"
 import { Link } from "react-router"
 
@@ -47,4 +47,5 @@ const Category = () => {
     </div>
   )
 }
+
 export default Category

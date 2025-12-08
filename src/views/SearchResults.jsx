@@ -1,14 +1,14 @@
 import { useState } from "react"
-import Search from "../../components/Search/Search"
+import Search from "../components/Search"
 import { useEffect } from "react"
-import { Result } from "../../services/category"
+import { movie } from "../services/movie"
 
 const SearchResults = () => {
   const [res, setRes] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      setRes(await Result())
+      setRes(await movie())
     }
     fetchData()
   }, [])

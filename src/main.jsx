@@ -1,10 +1,11 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import "./index.css"
-import App from "./App.jsx"
+import App from "./App"
 import { BrowserRouter, Routes, Route } from "react-router"
-import SearchResults from "./views/SearchResults/SearchResults.jsx"
-import MovieDetails from "./views/MovieDetails/MovieDetails.jsx"
+import SearchResults from "./views/SearchResults"
+import MovieDetails from "./views/MovieDetails"
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

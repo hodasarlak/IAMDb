@@ -15,7 +15,7 @@ const App = () => {
 
   const iOnKeyUp = (event) => {
     const value = event.target.value
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       if (value.trim()) {
         setSearchText(value)
         navigate(`/result?query=${encodeURIComponent(value)}`)
@@ -35,25 +35,31 @@ const App = () => {
   }
 
   return (
-    <div className="bg flex justify-center">
-      <div className="w-4xl h-screen text-white flex flex-col gap-8 items-center justify-center">
-        <img src={logo} alt="logo" />
-        <div className="bg-slate-800 h-12 rounded-2xl px-4 flex gap-2 w-full">
-          <button className="search-icon-btn" onClick={bOnClick}>
-            <img src={search} />
-          </button>
-          <input type="search" className="grow"
-            onChange={iOnChange}
-            onKeyUp={iOnKeyUp}
-            value={searchText}
-            placeholder="Search..." />
-          <button className="search-icon-btn">
-            <img src={voicesearch} className="border-l-2  border-black pl-3" />
-          </button>
+      <div className="bg flex justify-center">
+        <div className="w-4xl h-screen text-white flex flex-col gap-8 items-center justify-center">
+          <img src={logo} alt="logo" />
+          <div className="bg-slate-800 h-12 rounded-2xl px-4 flex gap-2 w-full">
+            <button className="search-icon-btn" onClick={bOnClick}>
+              <img src={search} />
+            </button>
+            <input
+              type="search"
+              className="grow"
+              onChange={iOnChange}
+              onKeyUp={iOnKeyUp}
+              value={searchText}
+              placeholder="Search..."
+            />
+            <button className="search-icon-btn">
+              <img
+                src={voicesearch}
+                className="border-l-2  border-black pl-3"
+              />
+            </button>
+          </div>
+          <CategoryFilter />
         </div>
-        <CategoryFilter />
       </div>
-    </div>
   )
 }
 

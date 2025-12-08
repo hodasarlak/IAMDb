@@ -1,7 +1,3 @@
-const movie = (categoryId = undefined, query = undefined) => {
-  // MOCK DATA
-  // TODO: CALL THE API
-  // fetch("http://localhost:8080/api/v1/Result")
   const movies = [
     {
       id: 1,
@@ -57,6 +53,11 @@ const movie = (categoryId = undefined, query = undefined) => {
       score: 9.0,
     },
   ]
+
+const movie = (categoryId = undefined, query = undefined) => {
+  // MOCK DATA
+  // TODO: CALL THE API
+  // fetch("http://localhost:8080/api/v1/movies")
   if (categoryId) {
     return movies.filter((item) =>
       item.category.filter((item2) => item2.id === +categoryId).length !== 0
@@ -68,4 +69,12 @@ const movie = (categoryId = undefined, query = undefined) => {
   return movies
 }
 
-export { movie }
+const movieById = (id) => {
+  // MOCK DATA
+  // TODO: CALL THE API
+  // fetch("http://localhost:8080/api/v1/movies")
+  const result = movies.filter((item) => +id === item.id)
+  return result.length === 1 ? result[0] : undefined 
+}
+
+export { movie, movieById }

@@ -5,9 +5,11 @@ import { useEffect } from "react"
 import { movie } from "../services/movie"
 import { useSearchParams } from "react-router"
 import { categoryById } from "../services/category"
+import MovieItem from "../components/MovieItem"
 
 const SearchResults = () => {
-  const [res, setRes] = useState([])
+  const [movies, setMovies] = useState([])
+  // const [res, setRes] = useState()
   const [searchParams] = useSearchParams()
   const [text, setText] = useState("")
   const categoryId = searchParams.get("categoryId")
@@ -23,10 +25,13 @@ const SearchResults = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setRes(await movie())
+    setMovies(await movie())
+    
     }
     fetchData()
   }, [])
+
+
 
   return (
     <div className="bg h-screen py-12.5 px-45 flex flex-col gap-8">
@@ -50,7 +55,9 @@ const SearchResults = () => {
           <img src={voicesearch} className="border-l-2  border-black pl-3" />
         </button>
       </div>
-      <div className="text-white">Result</div>
+      <div className="text-white">
+        {movies.map( item => <MovieItem item={item}/>)}
+      </div>
     </div>
   )
 }

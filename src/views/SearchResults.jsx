@@ -3,11 +3,12 @@ import voicesearch from "../assets/images/voicesearch.svg"
 import { useState } from "react"
 import { useEffect } from "react"
 import { movie } from "../services/movie"
-import { useSearchParams } from "react-router"
+import { useNavigate, useSearchParams } from "react-router"
 import { categoryById } from "../services/category"
 import MovieItem from "../components/MovieItem"
 
 const SearchResults = () => {
+  const navigate = useNavigate()
   const [movies, setMovies] = useState([])
   const [searchParams] = useSearchParams()
   const [text, setText] = useState("")
@@ -23,11 +24,26 @@ const SearchResults = () => {
     fetchData()
   }, [categoryId, query])
 
+  const bOnClick = (event) => {
+    event.preventDefault()
+    navigate(-1)
+  }
+
+  const sOnChange = (event) => {
+    event.preventDefault()
+    setText(event.target.value)
+    if (text.trim()) {
+      navigate(`/result?query=${encodeURIComponent(event.target.value)}`)
+    } else {
+      // TODO: alert
+    }
+  }
+
   return (
     <div className="bg h-screen py-12.5 px-45 flex flex-col gap-8">
       <div className="container">
         <div className="flex">
-          <button className="bg-slate-800 p-2.5 rounded-2xl text-white">
+          <button className="bg-slate-800 p-2.5 rounded-2xl text-white" onClick={bOnClick}>
             &lt;
           </button>
           <div className="grow text-center">
@@ -40,7 +56,7 @@ const SearchResults = () => {
         <button className="search-icon-btn">
           <img src={search} />
         </button>
-        <input type="search" className="grow" value={text} />
+        <input type="search" className="grow" value={text} onChange={sOnChange} />
         <button className="search-icon-btn">
           <img src={voicesearch} className="border-l-2  border-black pl-3" />
         </button>

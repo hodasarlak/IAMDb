@@ -2,15 +2,7 @@ import logo from "./assets/images/logo.svg";
 import CategoryFilter from "./components/CategoryFilter/CategoryFilter.jsx";
 import Search from "./components/Search/Search.jsx";
 const App = () => {
-  const getData = async () => {
-    try {
-      const response = await fetch("https://api.chucknorris.io/jokes/random");
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
 
   return (
     <div className="bg flex justify-center">

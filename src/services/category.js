@@ -1,45 +1,11 @@
-import { faker } from "@faker-js/faker"
-
-const categories = [
-  {
-    id: 1,
-    title: "Action",
-  },
-  {
-    id: 2,
-    title: "Biography",
-  },
-  {
-    id: 3,
-    title: "Crime",
-  },
-  {
-    id: 4,
-    title: "Drama",
-  },
-]
-
-const category = (showMore = false) => {
-  // MOCK DATA
-  // TODO: CALL THE API
-  // fetch("http://localhost:8080/api/v1/category")
-  if (showMore) {
-    return Promise.resolve([
-      ...categories,
-      {
-        id: 5,
-        title: faker.string.alpha(10),
-      },
-    ])
-  }
-
-  return Promise.resolve(categories)
+const category = async () => {
+  const res = await fetch("https://moviesapi.codingfront.dev/api/v1/genres")
+  const response = await res.json()
+  return response.map((item) => ({ id: item.id, title: item.name }))
 }
 
-const categoryById = (id) => {
-  // MOCK DATA
-  // TODO: CALL THE API
-  // fetch("http://localhost:8080/api/v1/category")
+const categoryById = async (id) => {
+  const categories = await category()
   const result = categories.filter((item) => +id === item.id)
   return result.length === 1 ? result[0] : undefined
 }

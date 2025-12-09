@@ -1,80 +1,28 @@
-  const movies = [
-    {
-      id: 1,
-      title: "The Shawshink Redemption",
-      year: 1994,
-      country: "United State",
-      category: [{ id: 4, title: "Drama" }],
-      score: 9.3,
-    },
-    {
-      id: 2,
-      title: "The Godfather",
-      year: 1972,
-      country: "United State",
-      category: [
-        { id: 3, title: "Crime" },
-        { id: 4, title: "Drama" },
-      ],
-      score: 9.2,
-    },
-    {
-      id: 3,
-      title: "The Dark Knight",
-      year: 2008,
-      country: "United State",
-      category: [
-        { id: 3, title: "Crime" },
-        { id: 4, title: "Drama" },
-        { id: 1, title: "Action" },
-      ],
-      score: 9.0,
-    },
-    {
-      id: 4,
-      title: "The Godfather:Part||",
-      year: 1974,
-      country: "United State",
-      category: [
-        { id: 3, title: "Crime" },
-        { id: 4, title: "Drama" },
-      ],
-      score: 9.0,
-    },
-    {
-      id: 5,
-      title: "12 Angry Man",
-      year: 1957,
-      country: "United State",
-      category: [
-        { id: 1, title: "Action" },
-        { id: 4, title: "Drama" },
-      ],
-      score: 9.0,
-    },
-  ]
+import { categoryById } from "./category"
 
-const movie = (categoryId = undefined, query = undefined) => {
-  // MOCK DATA
-  // TODO: CALL THE API
-  // fetch("http://localhost:8080/api/v1/movies")
+const movie = async (categoryId = undefined, query = undefined) => {
   if (categoryId) {
-    return movies.filter((item) =>
-      item.category.filter((item2) => item2.id === +categoryId).length !== 0
-    )
+    const category = await categoryById(categoryId)
+    const resG = await fetch(`https://moviesapi.codingfront.dev/api/v1/genres/${category.title}/movies`)
+    const responseG = await resG.json()
+    return responseG.data
   }
+
   if (query) {
-    return movies.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
+    const resQ = await fetch(`https://moviesapi.codingfront.dev/api/v1/movies?q=${query}`)
+    const responseQ = await resQ.json()
+    return responseQ.data
   }
-  return movies
+
+  const res = await fetch(`https://moviesapi.codingfront.dev/api/v1/movies`)
+  const response = await res.json()
+  return response.data
 }
 
-const movieById = (id) => {
-  // MOCK DATA
-  // TODO: CALL THE API
-  // fetch("http://localhost:8080/api/v1/movies")
-  const result = movies.filter((item) => +id === item.id)
-  return result.length === 1 ? result[0] : undefined 
+const movieById = async (id) => {
+  const res = await fetch(`https://moviesapi.codingfront.dev/api/v1/movies/${id}`)
+  const response = await res.json()
+  return response.data
 }
 
 export { movie, movieById }
